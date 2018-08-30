@@ -50,14 +50,49 @@ namespace GraficadorSenales
                     senal.amplitudMaxima = Math.Abs(valorMuestra);
                 }
 
-                //Recorrer una colección o arreglo.
-                foreach(Muestra muestra in senal.Muestras)
+                //se van añadiendo las muestras a la lista.
+                senal.Muestras.Add(new Muestra(i, valorMuestra));
+            }
+
+            //Recorrer una colección o arreglo.
+            foreach (Muestra muestra in senal.Muestras)
+            {
+                plnGrafica.Points.Add(new Point(muestra.x * scrContenedor.Width, (muestra.y)
+                * ((scrContenedor.Height / 2.0) - 30) * -1 + (scrContenedor.Height / 2)));
+            }
+        }
+
+        private void btnGraficarRampa_Click(object sender, RoutedEventArgs e)
+        {
+            double frecuencia = double.Parse(txtFrecuencia.Text);
+            double tiempoInicial = double.Parse(txtTiempoInicial.Text);
+            double tiempoFinal = double.Parse(txtTiempoFinal.Text);
+            double frecMuestreo = double.Parse(txtFrecMuestreo.Text);
+
+            double periodoMuestreo = 1 / frecMuestreo;
+
+            SenalRampa senal = new SenalRampa();
+
+            plnGrafica.Points.Clear();
+
+            for (double i = tiempoInicial; i <= tiempoFinal; i += periodoMuestreo)
+            {
+                double valorMuestra = senal.evaluar(i);
+
+                if (Math.Abs(valorMuestra) > senal.amplitudMaxima)
                 {
-                    plnGrafica.Points.Add(new Point(muestra.x * scrContenedor.Width, (muestra.y)
-                    * ((scrContenedor.Height / 2.0) - 30) * -1 + (scrContenedor.Height / 2)));
+                    senal.amplitudMaxima = Math.Abs(valorMuestra);
                 }
 
+                //se van añadiendo las muestras a la lista.
                 senal.Muestras.Add(new Muestra(i, valorMuestra));
+            }
+
+            //Recorrer una colección o arreglo.
+            foreach (Muestra muestra in senal.Muestras)
+            {
+                plnGrafica.Points.Add(new Point(muestra.x * scrContenedor.Width, (muestra.y)
+                * ((scrContenedor.Height / 2.0) - 30) * -1 + (scrContenedor.Height / 2)));
             }
         }
 
@@ -70,5 +105,6 @@ namespace GraficadorSenales
             txtTiempoFinal.Text = "1";
             txtFrecMuestreo.Text = "1000";
         }
+
     }
 }
