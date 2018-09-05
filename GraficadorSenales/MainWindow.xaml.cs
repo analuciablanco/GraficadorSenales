@@ -57,9 +57,12 @@ namespace GraficadorSenales
             //Recorrer una colección o arreglo.
             foreach (Muestra muestra in senal.Muestras)
             {
-                plnGrafica.Points.Add(new Point(muestra.x * scrContenedor.Width, (muestra.y)
-                * ((scrContenedor.Height / 2.0) - 30) * -1 + (scrContenedor.Height / 2)));
+                plnGrafica.Points.Add(new Point(muestra.x * scrContenedor.Width, 
+                    (muestra.y / senal.amplitudMaxima) * ((scrContenedor.Height / 2.0) - 30) * -1 + (scrContenedor.Height / 2)));
             }
+
+            lblAmplitudMaximaY.Text             = senal.amplitudMaxima.ToString();
+            lblAmplitudMaximaY_Negativa.Text    = "-" + senal.amplitudMaxima.ToString();
         }
 
         private void btnGraficarRampa_Click(object sender, RoutedEventArgs e)
@@ -91,8 +94,8 @@ namespace GraficadorSenales
             //Recorrer una colección o arreglo.
             foreach (Muestra muestra in senal.Muestras)
             {
-                plnGrafica.Points.Add(new Point(muestra.x * scrContenedor.Width, (muestra.y)
-                * ((scrContenedor.Height / 2.0) - 30) * -1 + (scrContenedor.Height / 2)));
+                plnGrafica.Points.Add(new Point(muestra.x * scrContenedor.Width, 
+                    (muestra.y / senal.amplitudMaxima) * ((scrContenedor.Height / 2.0) - 30) * -1 + (scrContenedor.Height / 2)));
             }
         }
 
