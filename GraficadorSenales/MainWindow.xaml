@@ -21,7 +21,11 @@
         <TextBox x:Name="txtFrecMuestreo" HorizontalAlignment="Left" Height="32" Margin="156,311,0,0" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="120" FontSize="16"/>
         <Button x:Name="btnGraficar" Content="Graficar (Señal Senoidal)" HorizontalAlignment="Left" Margin="121,368,0,0" VerticalAlignment="Top" Width="155" Height="24" FontSize="14" Click="btnGraficar_Click"/>
         <ScrollViewer x:Name="scrContenedor" HorizontalAlignment="Left" Height="373" Margin="328,19,0,0" VerticalAlignment="Top" Width="552" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden">
-            <Polyline Name="plnGrafica" Stroke="Aqua" StrokeThickness="2"/>
+            <Grid>
+                <Polyline Name="plnGrafica" Stroke="Purple" StrokeThickness="2"/>
+                <Polyline Name="plnEjeX" Stroke="Gray" StrokeThickness="1"/>
+                <Polyline Name="plnEjeY" Stroke="Gray" StrokeThickness="1"/>
+            </Grid>
         </ScrollViewer>
         <Button x:Name="btnReset" Content="Reset" HorizontalAlignment="Left" Margin="18,368,0,0" VerticalAlignment="Top" Width="50" Height="24" FontSize="14" Click="btnReset_Click"/>
         <Button x:Name="btnGraficarRampa" Content="Graficar (Señal Rampa)" HorizontalAlignment="Left" Margin="121,410,0,0" VerticalAlignment="Top" Width="155" FontSize="14" Click="btnGraficarRampa_Click"/>
