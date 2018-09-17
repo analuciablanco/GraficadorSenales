@@ -35,30 +35,38 @@ namespace GraficadorSenales
             double tiempoFinal = double.Parse(txtTiempoFinal.Text);
             double frecMuestreo = double.Parse(txtFrecMuestreo.Text);
 
-            double periodoMuestreo = 1 / frecMuestreo;
+            Senal senal;
 
-            SenalSenoidal senal = new SenalSenoidal(amplitud, fase, frecuencia);
-
-            plnGrafica.Points.Clear();
-
-            for(double i=tiempoInicial; i<=tiempoFinal; i+=periodoMuestreo)
+            switch(cbTipoSenal.SelectedIndex)
             {
-                double valorMuestra = senal.evaluar(i);
+                case 0: senal = new SenalSenoidal(amplitud, fase, frecuencia);
+                    break;
 
-                if(Math.Abs(valorMuestra) > senal.amplitudMaxima)
-                {
-                    senal.amplitudMaxima = Math.Abs(valorMuestra);
-                }
+                case 1: senal = new SenalRampa();
+                    break;
 
-                //se van añadiendo las muestras a la lista.
-                senal.Muestras.Add(new Muestra(i, valorMuestra));
+                default: senal = null;
+                    break;
             }
 
-            //Recorrer una colección o arreglo.
-            foreach (Muestra muestra in senal.Muestras)
+            senal.TiempoInicial = tiempoInicial;
+            senal.TiempoFinal = tiempoFinal;
+            senal.FrecMuestreo = frecMuestreo;
+
+            senal.construirSenalDigital();
+            plnGrafica.Points.Clear();
+
+            if (senal != null)
             {
-                plnGrafica.Points.Add(new Point((muestra.x - tiempoInicial) * scrContenedor.Width, 
-                    (muestra.y / senal.amplitudMaxima) * ((scrContenedor.Height / 2.0) - 30) * -1 + (scrContenedor.Height / 2)));
+                //Recorrer una colección o arreglo.
+                foreach (Muestra muestra in senal.Muestras)
+                {
+                    plnGrafica.Points.Add(new Point((muestra.x - tiempoInicial) * scrContenedor.Width,
+                        (muestra.y / senal.amplitudMaxima) * ((scrContenedor.Height / 2.0) - 30) * -1 + (scrContenedor.Height / 2)));
+                }
+
+                lblAmplitudMaximaY.Text = senal.amplitudMaxima.ToString();
+                lblAmplitudMaximaY_Negativa.Text = "-" + senal.amplitudMaxima.ToString();
             }
 
             //Graficando el eje de X
@@ -74,12 +82,9 @@ namespace GraficadorSenales
             plnEjeY.Points.Add(new Point(0 - tiempoInicial * scrContenedor.Width, scrContenedor.Height));
             //Punto de fin.
             plnEjeY.Points.Add(new Point(0 - tiempoInicial * scrContenedor.Width, scrContenedor.Height * -1));
-
-            lblAmplitudMaximaY.Text             = senal.amplitudMaxima.ToString();
-            lblAmplitudMaximaY_Negativa.Text    = "-" + senal.amplitudMaxima.ToString();
         }
 
-        private void btnGraficarRampa_Click(object sender, RoutedEventArgs e)
+        /* private void btnGraficarRampa_Click(object sender, RoutedEventArgs e)
         {
             double frecuencia = double.Parse(txtFrecuencia.Text);
             double tiempoInicial = double.Parse(txtTiempoInicial.Text);
@@ -87,8 +92,6 @@ namespace GraficadorSenales
             double frecMuestreo = double.Parse(txtFrecMuestreo.Text);
 
             double periodoMuestreo = 1 / frecMuestreo;
-
-            SenalRampa senal = new SenalRampa();
 
             plnGrafica.Points.Clear();
 
@@ -111,17 +114,6 @@ namespace GraficadorSenales
                 plnGrafica.Points.Add(new Point(muestra.x * scrContenedor.Width, 
                     (muestra.y / senal.amplitudMaxima) * ((scrContenedor.Height / 2.0) - 30) * -1 + (scrContenedor.Height / 2)));
             }
-        }
-
-        private void btnReset_Click(object sender, RoutedEventArgs e)
-        {
-            txtAmplitud.Text = "1";
-            txtFase.Text = "0";
-            txtFrecuencia.Text = "1";
-            txtTiempoInicial.Text = "0";
-            txtTiempoFinal.Text = "1";
-            txtFrecMuestreo.Text = "1000";
-        }
-
+        } */
     }
 }

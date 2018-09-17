@@ -6,25 +6,22 @@ using System.Threading.Tasks;
 
 namespace GraficadorSenales
 {
-    class SenalRampa
+    class SenalRampa : Senal
     {
+        //Exclusivos de señal rampa.
         public double amplitud { get; set; }
-        public double fase { get; set; }
         public double frecuencia { get; set; }
-        public double amplitudMaxima { get; set; }
-
-        public List<Muestra> Muestras { get; set; }
+        //
 
         public SenalRampa()
         {
             amplitud = 1.0;
-            fase = 0.0;
             frecuencia = 1.0;
             amplitudMaxima = 0.0;
             Muestras = new List<Muestra>();
         }
 
-        public double evaluar(double tiempo)
+        public override double evaluar(double tiempo)
         {
             double resultado;
 

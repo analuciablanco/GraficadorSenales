@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace GraficadorSenales
 {
-    class SenalSenoidal
+    class SenalSenoidal : Senal
     {
+        // Exclusivos de señal senoidal.
         public double amplitud { get; set; }
         public double fase { get; set; }
         public double frecuencia { get; set; }
-        public double amplitudMaxima { get; set; }
-
-        public List<Muestra> Muestras { get; set; }
+        //
 
         public SenalSenoidal()
         {
@@ -33,7 +32,7 @@ namespace GraficadorSenales
             Muestras = new List<Muestra>();
         }
 
-        public double evaluar(double tiempo)
+        public override double evaluar(double tiempo)
         {
             double resultado;
             resultado = amplitud * Math.Sin((2 * Math.PI * tiempo * frecuencia) + fase);
