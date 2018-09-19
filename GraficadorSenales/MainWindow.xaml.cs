@@ -28,9 +28,6 @@ namespace GraficadorSenales
 
         private void btnGraficar_Click(object sender, RoutedEventArgs e)
         {
-            double amplitud = double.Parse(txtAmplitud.Text);
-            double fase = double.Parse(txtFase.Text);
-            double frecuencia = double.Parse(txtFrecuencia.Text);
             double tiempoInicial = double.Parse(txtTiempoInicial.Text);
             double tiempoFinal = double.Parse(txtTiempoFinal.Text);
             double frecMuestreo = double.Parse(txtFrecMuestreo.Text);
@@ -39,7 +36,12 @@ namespace GraficadorSenales
 
             switch(cbTipoSenal.SelectedIndex)
             {
-                case 0: senal = new SenalSenoidal(amplitud, fase, frecuencia);
+                case 0:
+                    /* double amplitud = double.Parse(txtAmplitud.Text);
+                    double fase = double.Parse(txtFase.Text);
+                    double frecuencia = double.Parse(txtFrecuencia.Text); */
+
+                    senal = new SenalSenoidal(5, 0, 8);
                     break;
 
                 case 1: senal = new SenalRampa();
@@ -82,6 +84,27 @@ namespace GraficadorSenales
             plnEjeY.Points.Add(new Point(0 - tiempoInicial * scrContenedor.Width, scrContenedor.Height));
             //Punto de fin.
             plnEjeY.Points.Add(new Point(0 - tiempoInicial * scrContenedor.Width, scrContenedor.Height * -1));
+        }
+
+        private void cbTipoSenal_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (panelConfiguracion != null)
+            {
+                panelConfiguracion.Children.Clear();
+
+                switch (cbTipoSenal.SelectedIndex)
+                {
+                    case 0: //Senoidal
+                        panelConfiguracion.Children.Add(new ConfiguracionSenoidal());
+                        break;
+
+                    case 1:
+                        break;
+
+                    default:
+                        break;
+                }
+            }
         }
 
         /* private void btnGraficarRampa_Click(object sender, RoutedEventArgs e)
