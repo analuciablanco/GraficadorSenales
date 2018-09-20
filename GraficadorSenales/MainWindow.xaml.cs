@@ -37,11 +37,11 @@ namespace GraficadorSenales
             switch(cbTipoSenal.SelectedIndex)
             {
                 case 0:
-                    /* double amplitud = double.Parse(txtAmplitud.Text);
-                    double fase = double.Parse(txtFase.Text);
-                    double frecuencia = double.Parse(txtFrecuencia.Text); */
+                    double amplitud = double.Parse(((ConfiguracionSenoidal)(panelConfiguracion.Children[0])).txtAmplitud.Text);
+                    double fase = double.Parse(((ConfiguracionSenoidal)(panelConfiguracion.Children[0])).txtFase.Text);
+                    double frecuencia = double.Parse(((ConfiguracionSenoidal)(panelConfiguracion.Children[0])).txtFrecuencia.Text);
 
-                    senal = new SenalSenoidal(5, 0, 8);
+                    senal = new SenalSenoidal(1, 0, 2);
                     break;
 
                 case 1: senal = new SenalRampa();
@@ -98,7 +98,7 @@ namespace GraficadorSenales
                         panelConfiguracion.Children.Add(new ConfiguracionSenoidal());
                         break;
 
-                    case 1:
+                    case 1: //Rampa
                         break;
 
                     default:
@@ -106,37 +106,5 @@ namespace GraficadorSenales
                 }
             }
         }
-
-        /* private void btnGraficarRampa_Click(object sender, RoutedEventArgs e)
-        {
-            double frecuencia = double.Parse(txtFrecuencia.Text);
-            double tiempoInicial = double.Parse(txtTiempoInicial.Text);
-            double tiempoFinal = double.Parse(txtTiempoFinal.Text);
-            double frecMuestreo = double.Parse(txtFrecMuestreo.Text);
-
-            double periodoMuestreo = 1 / frecMuestreo;
-
-            plnGrafica.Points.Clear();
-
-            for (double i = tiempoInicial; i <= tiempoFinal; i += periodoMuestreo)
-            {
-                double valorMuestra = senal.evaluar(i);
-
-                if (Math.Abs(valorMuestra) > senal.amplitudMaxima)
-                {
-                    senal.amplitudMaxima = Math.Abs(valorMuestra);
-                }
-
-                //se van añadiendo las muestras a la lista.
-                senal.Muestras.Add(new Muestra(i, valorMuestra));
-            }
-
-            //Recorrer una colección o arreglo.
-            foreach (Muestra muestra in senal.Muestras)
-            {
-                plnGrafica.Points.Add(new Point(muestra.x * scrContenedor.Width, 
-                    (muestra.y / senal.amplitudMaxima) * ((scrContenedor.Height / 2.0) - 30) * -1 + (scrContenedor.Height / 2)));
-            }
-        } */
     }
 }
