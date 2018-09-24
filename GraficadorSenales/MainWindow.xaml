@@ -28,6 +28,7 @@
         <ComboBox x:Name="cbTipoSenal" SelectedIndex="0" HorizontalAlignment="Left" Margin="18,177,0,0" VerticalAlignment="Top" Width="258" SelectionChanged="cbTipoSenal_SelectionChanged">
             <ComboBoxItem>Senoidal</ComboBoxItem>
             <ComboBoxItem>Rampa</ComboBoxItem>
+            <ComboBoxItem>Exponencial</ComboBoxItem>
         </ComboBox>
         <TextBlock HorizontalAlignment="Left" Margin="18,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Width="120" Height="24" Text="Tipo de señal:"/>
         

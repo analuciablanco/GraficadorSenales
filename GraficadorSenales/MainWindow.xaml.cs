@@ -41,10 +41,16 @@ namespace GraficadorSenales
                     double fase = double.Parse(((ConfiguracionSenoidal)(panelConfiguracion.Children[0])).txtFase.Text);
                     double frecuencia = double.Parse(((ConfiguracionSenoidal)(panelConfiguracion.Children[0])).txtFrecuencia.Text);
 
-                    senal = new SenalSenoidal(1, 0, 2);
+                    senal = new SenalSenoidal(amplitud, fase, frecuencia);
                     break;
 
                 case 1: senal = new SenalRampa();
+                    break;
+
+                case 2:
+                    double alfa = double.Parse(((ConfiguracionExponencial)(panelConfiguracion.Children[0])).txtAlfa.Text);
+
+                    senal = new SenalExponencial(alfa);
                     break;
 
                 default: senal = null;
@@ -99,6 +105,10 @@ namespace GraficadorSenales
                         break;
 
                     case 1: //Rampa
+                        break;
+
+                    case 2: //Exponencial
+                        panelConfiguracion.Children.Add(new ConfiguracionExponencial());
                         break;
 
                     default:
