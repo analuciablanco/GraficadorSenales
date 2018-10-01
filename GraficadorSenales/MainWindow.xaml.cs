@@ -61,7 +61,18 @@ namespace GraficadorSenales
             senal.TiempoFinal = tiempoFinal;
             senal.FrecMuestreo = frecMuestreo;
 
+            //Construye señal
             senal.construirSenalDigital();
+
+            //Escalar
+            double factorEscala = double.Parse(txtFactorEscalaAmplitud.Text);
+            senal.escalar(factorEscala);
+            //Desplazar
+            double factorDesplazar = double.Parse(txtFactorDesplazamiento.Text);
+            senal.desplazar(factorDesplazar);
+            senal.actualizarAmplitudMaxima();
+
+            //Limpia la gráfica
             plnGrafica.Points.Clear();
 
             if (senal != null)
@@ -115,6 +126,27 @@ namespace GraficadorSenales
                         break;
                 }
             }
+        }
+
+        private void cbAmplitud_Checked(object sender, RoutedEventArgs e)
+        {
+            txtFactorEscalaAmplitud.IsEnabled = true;
+
+        }
+        private void cbAmplitud_UnChecked(object sender, RoutedEventArgs e)
+        {
+            txtFactorEscalaAmplitud.IsEnabled = false;
+            txtFactorEscalaAmplitud.Text = "1";
+        }
+
+        private void cbDesplazamiento_Checked(object sender, RoutedEventArgs e)
+        {
+            txtFactorDesplazamiento.IsEnabled = true;
+        }
+        private void cbDesplazamiento_UnChecked(object sender, RoutedEventArgs e)
+        {
+            txtFactorDesplazamiento.IsEnabled = false;
+            txtFactorDesplazamiento.Text = "0";
         }
     }
 }

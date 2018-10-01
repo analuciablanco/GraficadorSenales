@@ -9,6 +9,7 @@ namespace GraficadorSenales
     abstract class Senal
     {
         public List<Muestra> Muestras { get; set; }
+
         public double amplitudMaxima { get; set; }
         public double TiempoInicial { get; set; }
         public double TiempoFinal { get; set; }
@@ -31,6 +32,37 @@ namespace GraficadorSenales
 
                 //se van añadiendo las muestras a la lista.
                 Muestras.Add(new Muestra(i, valorMuestra));
+            }
+        }
+
+        public void escalar(double factor)
+        {
+            //por cara muestra se va a realizar esto
+            foreach (Muestra muestra in Muestras)
+            {
+                //se multiplica por Y para escalar, no por X para conservar el instante de tiempo
+                muestra.y *= factor;
+            }
+        }
+        public void actualizarAmplitudMaxima()
+        {
+            amplitudMaxima = 0;
+
+            foreach (Muestra muestra in Muestras)
+            {
+                if (Math.Abs(muestra.y) > amplitudMaxima)
+                {
+                    amplitudMaxima = Math.Abs(muestra.y);
+                }
+            }
+        }
+        public void desplazar(double factor)
+        {
+            //por cara muestra se va a realizar esto
+            foreach (Muestra muestra in Muestras)
+            {
+                //se suma en Y para desplazar, no por X para conservar el instante de tiempo
+                muestra.y += factor;
             }
         }
     }
