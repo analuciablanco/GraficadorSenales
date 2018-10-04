@@ -35,12 +35,15 @@
             <ComboBoxItem>Exponencial</ComboBoxItem>
         </ComboBox>
         <TextBlock HorizontalAlignment="Left" Margin="18,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Width="120" Height="24" Text="Tipo de señal:"/>
-        <TextBox x:Name="txtFactorEscalaAmplitud" HorizontalAlignment="Right" Height="27" Margin="0,41,448,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120" IsEnabled="False" FontSize="16" Grid.Column="1"/>
-        <TextBox x:Name="txtFactorDesplazamiento" HorizontalAlignment="Right" Height="27" Margin="0,98,446,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="122" IsEnabled="False" Grid.Column="1" FontSize="16"/>
-        <CheckBox x:Name="cbAmplitud" Content="" HorizontalAlignment="Left" Margin="8,47,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.488,-0.227" Checked="cbAmplitud_Checked" Unchecked="cbAmplitud_UnChecked" Grid.Column="1" Height="24" Width="23"/>
-        <TextBlock HorizontalAlignment="Left" Margin="6,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Width="144" Height="32" Text="Escala de amplitud:" RenderTransformOrigin="1.2,0.875" Grid.Column="1"/>
-        <TextBlock HorizontalAlignment="Left" Margin="6,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Width="144" Height="32" Text="Desplazamiento:" RenderTransformOrigin="1.2,0.875" Grid.Column="1"/>
-        <CheckBox x:Name="cbDesplazamiento" Content="" HorizontalAlignment="Left" Margin="8,107,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.488,-0.227" Checked="cbDesplazamiento_Checked" Unchecked="cbDesplazamiento_UnChecked" Grid.Column="1" Height="24" Width="23"/>
+        <TextBox x:Name="txtFactorEscalaAmplitud" HorizontalAlignment="Right" Height="27" Margin="0,28,450,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120" IsEnabled="False" FontSize="16" Grid.Column="1"/>
+        <TextBox x:Name="txtFactorDesplazamiento" HorizontalAlignment="Right" Height="27" Margin="0,85,448,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="122" IsEnabled="False" Grid.Column="1" FontSize="16"/>
+        <CheckBox x:Name="cbAmplitud" Content="" HorizontalAlignment="Left" Margin="6,34,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.488,-0.227" Checked="cbAmplitud_Checked" Unchecked="cbAmplitud_UnChecked" Grid.Column="1" Height="24" Width="23"/>
+        <TextBlock HorizontalAlignment="Left" Margin="4,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Width="144" Height="32" Text="Escala de amplitud:" RenderTransformOrigin="1.2,0.875" Grid.Column="1"/>
+        <TextBlock HorizontalAlignment="Left" Margin="4,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Width="144" Height="32" Text="Desplazamiento:" RenderTransformOrigin="1.2,0.875" Grid.Column="1"/>
+        <CheckBox x:Name="cbDesplazamiento" Content="" HorizontalAlignment="Left" Margin="6,91,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.488,-0.227" Checked="cbDesplazamiento_Checked" Unchecked="cbDesplazamiento_UnChecked" Grid.Column="1" Height="24" Width="23"/>
+        <TextBox x:Name="txtUmbral" HorizontalAlignment="Right" Height="27" Margin="0,139,448,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="122" IsEnabled="False" Grid.Column="1" FontSize="16"/>
+        <TextBlock HorizontalAlignment="Left" Margin="4,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Width="144" Height="32" RenderTransformOrigin="1.2,0.875" Grid.Column="1"><Run Text="Umbral"/><Run Text=":"/></TextBlock>
+        <CheckBox x:Name="cbUmbral" Content="" HorizontalAlignment="Left" Margin="6,145,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.488,-0.227" Checked="cbUmbral_Checked" Unchecked="cbUmbral_UnChecked" Grid.Column="1" Height="24" Width="23"/>
 
 
     </Grid>

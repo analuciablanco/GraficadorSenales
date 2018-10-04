@@ -71,6 +71,9 @@ namespace GraficadorSenales
             double factorDesplazar = double.Parse(txtFactorDesplazamiento.Text);
             senal.desplazar(factorDesplazar);
             senal.actualizarAmplitudMaxima();
+            //Truncar
+            double factorTruncar = double.Parse(txtUmbral.Text);
+            senal.truncar(factorTruncar);
 
             //Limpia la gráfica
             plnGrafica.Points.Clear();
@@ -147,6 +150,16 @@ namespace GraficadorSenales
         {
             txtFactorDesplazamiento.IsEnabled = false;
             txtFactorDesplazamiento.Text = "0";
+        }
+
+        private void cbUmbral_Checked(object sender, RoutedEventArgs e)
+        {
+            txtUmbral.IsEnabled = true;
+        }
+        private void cbUmbral_UnChecked(object sender, RoutedEventArgs e)
+        {
+            txtUmbral.IsEnabled = false;
+            txtUmbral.Text = "1";
         }
     }
 }

@@ -44,6 +44,7 @@ namespace GraficadorSenales
                 muestra.y *= factor;
             }
         }
+
         public void actualizarAmplitudMaxima()
         {
             amplitudMaxima = 0;
@@ -56,6 +57,7 @@ namespace GraficadorSenales
                 }
             }
         }
+
         public void desplazar(double factor)
         {
             //por cara muestra se va a realizar esto
@@ -63,6 +65,17 @@ namespace GraficadorSenales
             {
                 //se suma en Y para desplazar, no por X para conservar el instante de tiempo
                 muestra.y += factor;
+            }
+        }
+
+        public void truncar(double umbral)
+        {
+            //por cara muestra se va a realizar esto
+            foreach (Muestra muestra in Muestras)
+            {
+                //
+                if (muestra.y > umbral) muestra.y = umbral;
+                else if (muestra.y < (umbral * -1)) muestra.y = umbral * -1;
             }
         }
     }
