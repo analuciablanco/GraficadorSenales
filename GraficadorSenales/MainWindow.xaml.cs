@@ -87,8 +87,8 @@ namespace GraficadorSenales
                         (muestra.y / senal.amplitudMaxima) * ((scrContenedor.Height / 2.0) - 30) * -1 + (scrContenedor.Height / 2)));
                 }
 
-                lblAmplitudMaximaY.Text = senal.amplitudMaxima.ToString();
-                lblAmplitudMaximaY_Negativa.Text = "-" + senal.amplitudMaxima.ToString();
+                lblAmplitudMaximaY.Text = senal.amplitudMaxima.ToString("F");
+                lblAmplitudMaximaY_Negativa.Text = "-" + senal.amplitudMaxima.ToString("F");
             }
 
             //Graficando el eje de X
@@ -131,6 +131,11 @@ namespace GraficadorSenales
             }
         }
 
+        private void cbTipoSenal_2_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
         private void cbAmplitud_Checked(object sender, RoutedEventArgs e)
         {
             txtFactorEscalaAmplitud.IsEnabled = true;
@@ -161,5 +166,7 @@ namespace GraficadorSenales
             txtUmbral.IsEnabled = false;
             txtUmbral.Text = "1";
         }
+
+        
     }
 }
