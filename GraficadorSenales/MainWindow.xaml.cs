@@ -33,10 +33,12 @@ namespace GraficadorSenales
             double frecMuestreo = double.Parse(txtFrecMuestreo.Text);
 
             Senal senal;
+            Senal senal2;
 
+            //Primer señal.
             switch(cbTipoSenal.SelectedIndex)
             {
-                case 0:
+                case 0: //Senoidal.
                     double amplitud = double.Parse(((ConfiguracionSenoidal)(panelConfiguracion.Children[0])).txtAmplitud.Text);
                     double fase = double.Parse(((ConfiguracionSenoidal)(panelConfiguracion.Children[0])).txtFase.Text);
                     double frecuencia = double.Parse(((ConfiguracionSenoidal)(panelConfiguracion.Children[0])).txtFrecuencia.Text);
@@ -44,10 +46,11 @@ namespace GraficadorSenales
                     senal = new SenalSenoidal(amplitud, fase, frecuencia);
                     break;
 
-                case 1: senal = new SenalRampa();
+                case 1: //Rampa.
+                    senal = new SenalRampa();
                     break;
 
-                case 2:
+                case 2: //Exponencial.
                     double alfa = double.Parse(((ConfiguracionExponencial)(panelConfiguracion.Children[0])).txtAlfa.Text);
 
                     senal = new SenalExponencial(alfa);
@@ -61,21 +64,63 @@ namespace GraficadorSenales
             senal.TiempoFinal = tiempoFinal;
             senal.FrecMuestreo = frecMuestreo;
 
+            //Segunda señal.
+            switch (cbTipoSenal_2.SelectedIndex)
+            {
+                case 0: //Senoidal.
+                    double amplitud = double.Parse(((ConfiguracionSenoidal)(panelConfiguracion_2.Children[0])).txtAmplitud.Text);
+                    double fase = double.Parse(((ConfiguracionSenoidal)(panelConfiguracion_2.Children[0])).txtFase.Text);
+                    double frecuencia = double.Parse(((ConfiguracionSenoidal)(panelConfiguracion_2.Children[0])).txtFrecuencia.Text);
+
+                    senal2 = new SenalSenoidal(amplitud, fase, frecuencia);
+                    break;
+
+                case 1: //Rampa.
+                    senal2 = new SenalRampa();
+                    break;
+
+                case 2: //Exponencial.
+                    double alfa = double.Parse(((ConfiguracionExponencial)(panelConfiguracion_2.Children[0])).txtAlfa.Text);
+
+                    senal2 = new SenalExponencial(alfa);
+                    break;
+
+                default:
+                    senal2 = null;
+                    break;
+            }
+
+            senal2.TiempoInicial = tiempoInicial;
+            senal2.TiempoFinal = tiempoFinal;
+            senal2.FrecMuestreo = frecMuestreo;
+
             //Construye señal
             senal.construirSenalDigital();
+            senal2.construirSenalDigital();
 
-            //Escalar
+            //Escalar PRIMERA SEÑAL.
             double factorEscala = double.Parse(txtFactorEscalaAmplitud.Text);
             senal.escalar(factorEscala);
-            //Desplazar
+            //Desplazar PRIMERA SEÑAL.
             double factorDesplazar = double.Parse(txtFactorDesplazamiento.Text);
             senal.desplazar(factorDesplazar);
             senal.actualizarAmplitudMaxima();
-            //Truncar
+            //Truncar PRIMERA SEÑAL.
             double factorTruncar = double.Parse(txtUmbral.Text);
             senal.truncar(factorTruncar);
 
-            //Limpia la gráfica
+            //Escalar SEGUNDA SEÑAL.
+            double factorEscala2 = double.Parse(txtFactorEscalaAmplitud_2.Text);
+            senal2.escalar(factorEscala2);
+            //Desplazar SEGUNDA SEÑAL.
+            double factorDesplazar2 = double.Parse(txtFactorDesplazamiento_2.Text);
+            senal2.desplazar(factorDesplazar2);
+            senal2.actualizarAmplitudMaxima();
+            //Truncar SEGUNDA SEÑAL.
+            double factorTruncar2 = double.Parse(txtUmbral_2.Text);
+            senal2.truncar(factorTruncar2);
+
+            //Limpia las gráficas.
             plnGrafica.Points.Clear();
 
             if (senal != null)
@@ -133,9 +178,30 @@ namespace GraficadorSenales
 
         private void cbTipoSenal_2_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (panelConfiguracion_2 != null)
+            {
+                panelConfiguracion_2.Children.Clear();
 
+                switch (cbTipoSenal_2.SelectedIndex)
+                {
+                    case 0: //Senoidal
+                        panelConfiguracion_2.Children.Add(new ConfiguracionSenoidal());
+                        break;
+
+                    case 1: //Rampa
+                        break;
+
+                    case 2: //Exponencial
+                        panelConfiguracion_2.Children.Add(new ConfiguracionExponencial());
+                        break;
+
+                    default:
+                        break;
+                }
+            }
         }
 
+        //Primera señal
         private void cbAmplitud_Checked(object sender, RoutedEventArgs e)
         {
             txtFactorEscalaAmplitud.IsEnabled = true;
@@ -167,6 +233,35 @@ namespace GraficadorSenales
             txtUmbral.Text = "1";
         }
 
-        
+        //Segunda señal
+        private void cbAmplitud_2_Checked(object sender, RoutedEventArgs e)
+        {
+            txtFactorEscalaAmplitud_2.IsEnabled = true;
+        }
+        private void cbAmplitud_2_UnChecked(object sender, RoutedEventArgs e)
+        {
+            txtFactorEscalaAmplitud_2.IsEnabled = false;
+            txtFactorEscalaAmplitud_2.Text = "1";
+        }
+
+        private void cbDesplazamiento_2_Checked(object sender, RoutedEventArgs e)
+        {
+            txtFactorDesplazamiento_2.IsEnabled = true;
+        }
+        private void cbDesplazamiento_2_UnChecked(object sender, RoutedEventArgs e)
+        {
+            txtFactorDesplazamiento_2.IsEnabled = false;
+            txtFactorDesplazamiento_2.Text = "0";
+        }
+
+        private void cbUmbral_2_Checked(object sender, RoutedEventArgs e)
+        {
+            txtUmbral_2.IsEnabled = true;
+        }
+        private void cbUmbral_2_UnChecked(object sender, RoutedEventArgs e)
+        {
+            txtUmbral_2.IsEnabled = false;
+            txtUmbral_2.Text = "1";
+        }
     }
 }
