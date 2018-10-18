@@ -78,5 +78,12 @@ namespace GraficadorSenales
                 else if (muestra.y < (umbral * -1)) muestra.y = umbral * -1;
             }
         }
+
+        public static Senal sumar(Senal suma1, Senal suma2)
+        {
+
+
+            return null;
+        }
     }
 }

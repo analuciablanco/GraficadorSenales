@@ -21,6 +21,8 @@ namespace GraficadorSenales
 
     public partial class MainWindow : Window
     {
+        double amplitudMaxima = 1;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -106,8 +108,8 @@ namespace GraficadorSenales
             senal.desplazar(factorDesplazar);
             senal.actualizarAmplitudMaxima();
             //Truncar PRIMERA SEÑAL.
-            double factorTruncar = double.Parse(txtUmbral.Text);
-            senal.truncar(factorTruncar);
+            /* double factorTruncar = double.Parse(txtUmbral.Text);
+            senal.truncar(factorTruncar); */
 
             //Escalar SEGUNDA SEÑAL.
             double factorEscala2 = double.Parse(txtFactorEscalaAmplitud_2.Text);
@@ -117,23 +119,45 @@ namespace GraficadorSenales
             senal2.desplazar(factorDesplazar2);
             senal2.actualizarAmplitudMaxima();
             //Truncar SEGUNDA SEÑAL.
-            double factorTruncar2 = double.Parse(txtUmbral_2.Text);
-            senal2.truncar(factorTruncar2);
+            /* double factorTruncar2 = double.Parse(txtUmbral_2.Text);
+            senal2.truncar(factorTruncar2); */
+
+            //Establecer amplitud máxima comparando con AMBAS señales.
+            senal.actualizarAmplitudMaxima();
+            senal2.actualizarAmplitudMaxima();
+
+            //Definimos la amplitud máxima con la primer señal por default y comparamos con la segunda en caso de ser mayor.
+            amplitudMaxima = senal.amplitudMaxima;
+            if (senal2.amplitudMaxima > amplitudMaxima) amplitudMaxima = senal2.amplitudMaxima;
 
             //Limpia las gráficas.
             plnGrafica.Points.Clear();
+            plnGrafica_2.Points.Clear();
 
+            lblAmplitudMaximaY.Text = amplitudMaxima.ToString("F");
+            lblAmplitudMaximaY_Negativa.Text = "-" + amplitudMaxima.ToString("F");
+
+            //Graficando PRIMERA señal.
             if (senal != null)
             {
                 //Recorrer una colección o arreglo.
                 foreach (Muestra muestra in senal.Muestras)
                 {
                     plnGrafica.Points.Add(new Point((muestra.x - tiempoInicial) * scrContenedor.Width,
-                        (muestra.y / senal.amplitudMaxima) * ((scrContenedor.Height / 2.0) - 30) * -1 + (scrContenedor.Height / 2)));
+                        (muestra.y / amplitudMaxima) * ((scrContenedor.Height / 2.0) - 30) * -1 + (scrContenedor.Height / 2)));
                 }
+            }
 
-                lblAmplitudMaximaY.Text = senal.amplitudMaxima.ToString("F");
-                lblAmplitudMaximaY_Negativa.Text = "-" + senal.amplitudMaxima.ToString("F");
+
+            //Graficando SEGUNDA señal.
+            if (senal2 != null)
+            {
+                //Recorrer una colección o arreglo.
+                foreach (Muestra muestra in senal2.Muestras)
+                {
+                    plnGrafica_2.Points.Add(new Point((muestra.x - tiempoInicial) * scrContenedor.Width,
+                        (muestra.y / amplitudMaxima) * ((scrContenedor.Height / 2.0) - 30) * -1 + (scrContenedor.Height / 2)));
+                }
             }
 
             //Graficando el eje de X
@@ -263,5 +287,6 @@ namespace GraficadorSenales
             txtUmbral_2.IsEnabled = false;
             txtUmbral_2.Text = "1";
         }
+
     }
 }

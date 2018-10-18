@@ -54,6 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="SenalPersonalizada.cs" />
     <Compile Include="ConfiguracionExponencial.xaml.cs">
       <DependentUpon>ConfiguracionExponencial.xaml</DependentUpon>
     </Compile>
