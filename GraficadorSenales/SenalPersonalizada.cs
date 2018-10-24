@@ -8,6 +8,11 @@ namespace GraficadorSenales
 {
     class SenalPersonalizada : Senal
     {
+        public SenalPersonalizada()
+        {
+            Muestras = new List<Muestra>();
+        }
+
         public override double evaluar(double tiempo)
         {
             return 0;

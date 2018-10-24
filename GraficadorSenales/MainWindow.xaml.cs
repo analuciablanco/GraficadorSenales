@@ -23,6 +23,10 @@ namespace GraficadorSenales
     {
         double amplitudMaxima = 1;
 
+        Senal senal;
+        Senal senal2;
+        Senal senalResultado;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -34,11 +38,8 @@ namespace GraficadorSenales
             double tiempoFinal = double.Parse(txtTiempoFinal.Text);
             double frecMuestreo = double.Parse(txtFrecMuestreo.Text);
 
-            Senal senal;
-            Senal senal2;
-
             //Primer señal.
-            switch(cbTipoSenal.SelectedIndex)
+            switch (cbTipoSenal.SelectedIndex)
             {
                 case 0: //Senoidal.
                     double amplitud = double.Parse(((ConfiguracionSenoidal)(panelConfiguracion.Children[0])).txtAmplitud.Text);
@@ -127,7 +128,10 @@ namespace GraficadorSenales
             senal2.actualizarAmplitudMaxima();
 
             //Definimos la amplitud máxima con la primer señal por default y comparamos con la segunda en caso de ser mayor.
+            senal.actualizarAmplitudMaxima();
+            senal2.actualizarAmplitudMaxima();
             amplitudMaxima = senal.amplitudMaxima;
+
             if (senal2.amplitudMaxima > amplitudMaxima) amplitudMaxima = senal2.amplitudMaxima;
 
             //Limpia las gráficas.
@@ -288,5 +292,51 @@ namespace GraficadorSenales
             txtUmbral_2.Text = "1";
         }
 
+        private void btnRealizarOperacion_Click(object sender, RoutedEventArgs e)
+        {
+            senalResultado = null;
+            switch (cbTipoOperacion.SelectedIndex)
+            {
+                case 0: //Suma
+                    //los metodos estaticos no necesitan una instancia
+                    senalResultado = Senal.sumar(senal, senal2);
+                    break;
+                case 1: //multiplicacion
+                    break;
+                default:
+                    break;
+            }
+            //se actualiza la amplitud maxima del resultado 
+            senalResultado.actualizarAmplitudMaxima();
+            plnGraficaResultado.Points.Clear();
+            //cambia los valores de la etiqueta
+            //La F es que da el formato para redondear a 2 decimales, la funcion ToString puede recibir un parametro que es el que va a decidir en que formato va a estar,existen varios parametros
+            lblAmplitudMaximaY_Resultado.Text = senalResultado.amplitudMaxima.ToString("F");
+            lblAmplitudMaximaY_Negativa_Resultado.Text = "-" + senalResultado.amplitudMaxima.ToString("F");
+            //hacerlo si la señal no es nula
+            if (senalResultado != null)
+            {
+                //recorrer una coleccion o arreglo
+                //muestra toma el valor de señal.muestra en cada recorrido del ciclo
+                foreach (Muestra muestra in senalResultado.Muestras)
+                {
+                    //se evalua la señal, luego se ajusta y de ahi se agrega el punto
+                    plnGraficaResultado.Points.Add(new Point((muestra.x - senalResultado.TiempoInicial) * scrResultadoOperacion.Width, (muestra.y / senalResultado.amplitudMaxima * ((scrResultadoOperacion.Height / 2) - 30) * -1) + (scrResultadoOperacion.Height / 2)));
+                }
+            }
+
+            //Graficando el eje de X
+            plnEjeXResultado.Points.Clear();
+            //Punto de inicio.
+            plnEjeXResultado.Points.Add(new Point(0, (scrResultadoOperacion.Height / 2)));
+            //Punto de fin.
+            plnEjeXResultado.Points.Add(new Point((senalResultado.TiempoFinal - senalResultado.TiempoInicial) * scrResultadoOperacion.Width, (scrResultadoOperacion.Height / 2)));
+            //Graficando el eje de Y
+            plnEjeYResultado.Points.Clear();
+            //Punto de inicio.
+            plnEjeYResultado.Points.Add(new Point(0 - senalResultado.TiempoInicial * scrResultadoOperacion.Width, scrResultadoOperacion.Height));
+            //Punto de fin.
+            plnEjeYResultado.Points.Add(new Point(0 - senalResultado.TiempoInicial * scrResultadoOperacion.Width, scrResultadoOperacion.Height * -1));
+        }
     }
 }
