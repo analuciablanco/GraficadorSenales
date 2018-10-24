@@ -99,5 +99,26 @@ namespace GraficadorSenales
             }
             return resultado;
         }
+
+        public static Senal multiplicar(Senal multiplicacion1, Senal multiplicacion2)
+        {
+            //construimos la señal resultado
+            SenalPersonalizada resultado = new SenalPersonalizada();
+            //sumamos muestra por muestra
+            resultado.TiempoInicial = multiplicacion1.TiempoInicial;
+            resultado.TiempoFinal = multiplicacion1.TiempoFinal;
+            resultado.FrecMuestreo = multiplicacion1.FrecMuestreo;
+            //recorremos 1 lista de muestras y a la 2 señal accedemos por un indice
+            int indice = 0;
+            foreach (Muestra muestra in multiplicacion1.Muestras)
+            {
+                Muestra muestraResultado = new Muestra();
+                muestraResultado.x = muestra.x;
+                muestraResultado.y = muestra.y * multiplicacion2.Muestras[indice].y;
+                indice++;
+                resultado.Muestras.Add(muestraResultado);
+            }
+            return resultado;
+        }
     }
 }

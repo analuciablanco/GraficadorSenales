@@ -301,7 +301,8 @@ namespace GraficadorSenales
                     //los metodos estaticos no necesitan una instancia
                     senalResultado = Senal.sumar(senal, senal2);
                     break;
-                case 1: //multiplicacion
+                case 1: //Multiplicación
+                    senalResultado = Senal.multiplicar(senal, senal2);
                     break;
                 default:
                     break;
@@ -311,8 +312,8 @@ namespace GraficadorSenales
             plnGraficaResultado.Points.Clear();
             //cambia los valores de la etiqueta
             //La F es que da el formato para redondear a 2 decimales, la funcion ToString puede recibir un parametro que es el que va a decidir en que formato va a estar,existen varios parametros
-            lblAmplitudMaximaY_Resultado.Text = senalResultado.amplitudMaxima.ToString("F");
-            lblAmplitudMaximaY_Negativa_Resultado.Text = "-" + senalResultado.amplitudMaxima.ToString("F");
+            lblAmplitudMaximaY_Copy.Text = senalResultado.amplitudMaxima.ToString("F");
+            lblAmplitudMaximaY_Negativa_Copy.Text = "-" + senalResultado.amplitudMaxima.ToString("F");
             //hacerlo si la señal no es nula
             if (senalResultado != null)
             {
