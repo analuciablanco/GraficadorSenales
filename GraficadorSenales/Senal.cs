@@ -120,5 +120,36 @@ namespace GraficadorSenales
             }
             return resultado;
         }
+
+        public static Senal convolucionar(Senal operando1, Senal operando2)
+        {
+            SenalPersonalizada resultado = new SenalPersonalizada();
+            resultado.TiempoInicial = operando1.TiempoInicial + operando2.TiempoInicial;
+            resultado.TiempoFinal = operando1.TiempoFinal + operando2.TiempoFinal;
+            resultado.FrecMuestreo = operando1.FrecMuestreo;
+
+            double periodoMuestreo = 1 / resultado.FrecMuestreo;
+            double duracionSenal = resultado.TiempoFinal - resultado.TiempoInicial;
+            double cantidadMuestrasResultado = duracionSenal * resultado.FrecMuestreo;
+
+            double instanteActual = resultado.TiempoInicial;
+            for(int n=0; n<cantidadMuestrasResultado; n++)
+            {
+                double valorMuestra = 0;
+                for(int k=0; k<operando2.Muestras.Count; k++)
+                {
+                    if((n-k) >= 0 && (n-k) < operando2.Muestras.Count)
+                    {
+                        valorMuestra += operando1.Muestras[k].y * operando2.Muestras[n - k].y;
+                    }  
+                }
+
+                Muestra muestra = new Muestra(instanteActual, valorMuestra);
+                resultado.Muestras.Add(muestra);
+                instanteActual += periodoMuestreo;
+            }
+
+            return resultado;
+        }
     }
 }

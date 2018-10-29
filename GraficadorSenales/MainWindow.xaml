@@ -71,6 +71,7 @@
         <ComboBox x:Name="cbTipoOperacion" SelectedIndex="0" HorizontalAlignment="Left" Margin="984,260,-192,0" VerticalAlignment="Top" Width="182">
             <ComboBoxItem>Suma</ComboBoxItem>
             <ComboBoxItem>Multiplicacion</ComboBoxItem>
+            <ComboBoxItem>Convolución</ComboBoxItem>
         </ComboBox>
         <Button x:Name="btnRealizarOperacion" Content="Realizar Operación" HorizontalAlignment="Left" Margin="984,290,-192,0" VerticalAlignment="Top" Width="182" Click="btnRealizarOperacion_Click"/>
         <TextBlock x:Name="lblAmplitudMaximaY_Copy" HorizontalAlignment="Left" Margin="18,522,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" FontSize="15" Width="40" Height="20"/>

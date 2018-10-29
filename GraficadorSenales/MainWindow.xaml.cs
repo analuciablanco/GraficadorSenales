@@ -304,6 +304,9 @@ namespace GraficadorSenales
                 case 1: //Multiplicación
                     senalResultado = Senal.multiplicar(senal, senal2);
                     break;
+                case 2: //Convolución
+                    senalResultado = Senal.convolucionar(senal, senal2);
+                    break;
                 default:
                     break;
             }
