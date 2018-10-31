@@ -65,6 +65,7 @@
     <Compile Include="Senal.cs" />
     <Compile Include="SenalExponencial.cs" />
     <Compile Include="SenalRampa.cs" />
+    <Compile Include="SenalRectangular.cs" />
     <Compile Include="SenalSenoidal.cs" />
     <Page Include="ConfiguracionExponencial.xaml">
       <SubType>Designer</SubType>

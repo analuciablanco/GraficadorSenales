@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace GraficadorSenales
 {
-    class SenalRampa : Senal
+    class SenalRectangular : Senal
     {
-        public SenalRampa()
+        public SenalRectangular()
         {
             amplitudMaxima = 0.0;
             Muestras = new List<Muestra>();
@@ -18,14 +18,15 @@ namespace GraficadorSenales
         {
             double resultado;
 
-            if(tiempo >= 0)
+            if (Math.Abs(tiempo) == 0.5)
             {
-                resultado = tiempo;
+                resultado = 0.5;
             }
-            else
+            else if (Math.Abs(tiempo) < 0.5)
             {
-                resultado = 0;
+                resultado = 1;
             }
+            else resultado = 0;
 
             return resultado;
         }

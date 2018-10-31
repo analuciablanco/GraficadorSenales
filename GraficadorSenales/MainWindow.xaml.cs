@@ -59,6 +59,10 @@ namespace GraficadorSenales
                     senal = new SenalExponencial(alfa);
                     break;
 
+                case 3: //Rectangular
+                    senal = new SenalRectangular();
+                    break;
+
                 default: senal = null;
                     break;
             }
@@ -86,6 +90,10 @@ namespace GraficadorSenales
                     double alfa = double.Parse(((ConfiguracionExponencial)(panelConfiguracion_2.Children[0])).txtAlfa.Text);
 
                     senal2 = new SenalExponencial(alfa);
+                    break;
+
+                case 3: //Rectangular
+                    senal = new SenalRectangular();
                     break;
 
                 default:
@@ -198,6 +206,9 @@ namespace GraficadorSenales
                         panelConfiguracion.Children.Add(new ConfiguracionExponencial());
                         break;
 
+                    case 3: //Rectangular
+                        break;
+
                     default:
                         break;
                 }
@@ -221,6 +232,9 @@ namespace GraficadorSenales
 
                     case 2: //Exponencial
                         panelConfiguracion_2.Children.Add(new ConfiguracionExponencial());
+                        break;
+
+                    case 3: //Rectangular
                         break;
 
                     default:
