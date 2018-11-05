@@ -93,7 +93,7 @@ namespace GraficadorSenales
                     break;
 
                 case 3: //Rectangular
-                    senal = new SenalRectangular();
+                    senal2 = new SenalRectangular();
                     break;
 
                 default:

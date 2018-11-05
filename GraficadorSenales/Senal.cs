@@ -144,6 +144,8 @@ namespace GraficadorSenales
                     }  
                 }
 
+                valorMuestra /= resultado.FrecMuestreo;
+                //La linea de arriba es lo mismo que: valorMuestra = valorMuestra / resultado.FrecMuestreo;
                 Muestra muestra = new Muestra(instanteActual, valorMuestra);
                 resultado.Muestras.Add(muestra);
                 instanteActual += periodoMuestreo;
